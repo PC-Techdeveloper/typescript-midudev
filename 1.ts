@@ -181,3 +181,4 @@ console.log(secondThor.isActive) // true
 //Mutabilidad -> ❌
 // secondThor.id = 42422434324324
 
+
