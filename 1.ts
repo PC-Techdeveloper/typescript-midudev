@@ -246,8 +246,8 @@ const address2: Address = {
   city: 'Paris',
 }
 
-// Type from function return 
-function createAdress(){
+// Type from function return
+function createAdress() {
   return {
     planet: 'Tierra',
     city: 'Barcelona',
@@ -255,3 +255,25 @@ function createAdress(){
 }
 //Type of return in the function
 type Address3 = ReturnType<typeof createAdress>
+
+//ARRAYS
+
+const languages: (string | number | boolean)[] = []
+// const languages2: Array<string | number | boolean> = [] -> Otra forma ✅
+
+languages.push('TypeScript')
+languages.push('JavaScript')
+languages.push('Java')
+languages.push(2)
+languages.push(true)
+
+type ThirdHeroId = `${string}-${string}-${string}-${string}-${string}`
+
+type ThirdHeroPowerScale = 'local' | 'planetary' | 'galactic' | 'universal' | 'multiversal'
+
+type SecondHeroBasicInfo = {
+  name: string
+  power: number
+}
+
+const herosWithBasicInfo: SecondHeroBasicInfo[] = []
