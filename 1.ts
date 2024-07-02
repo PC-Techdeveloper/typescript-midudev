@@ -219,3 +219,39 @@ thirdThor.powerScale = 'planetary'
 
 // Type Indexing -> Indices de tipos
 
+type SecondHeroProperties = {
+  isActive: boolean
+  address: {
+    planet: string
+    city: string
+  }
+}
+
+const addressHero: SecondHeroProperties['address'] = {
+  planet: 'Earth',
+  city: 'Madrid',
+}
+
+// Type from value and typeof
+// Typeof -> Extraer los tipos de un objeto, funciones, variables, etc.
+const address1 = {
+  planet: 'Earth',
+  city: 'Madrid',
+}
+
+type Address = typeof address1
+
+const address2: Address = {
+  planet: 'Mars',
+  city: 'Paris',
+}
+
+// Type from function return 
+function createAdress(){
+  return {
+    planet: 'Tierra',
+    city: 'Barcelona',
+  }
+}
+//Type of return in the function
+type Address3 = ReturnType<typeof createAdress>
