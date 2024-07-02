@@ -146,14 +146,17 @@ const thor = createHero({ name: 'Thor', power: 1500 })
 // readonly -> Propiedad de lectura
 
 // Templates union types
-
 type HeroId = `${string}-${string}-${string}-${string}-${string}`
+
+//Union Types -> Tipos unidos
+type HeroPowerScale = 'local' | 'planetary' | 'galactic' | 'universal' | 'multiversal'
 
 type SecondHero = {
   readonly id?: HeroId
   name: string
   power: number
   isActive?: boolean
+  powerScale?: HeroPowerScale
 }
 
 let secondHero: SecondHero = {
@@ -172,13 +175,47 @@ function secondCreateHero(hero: SecondHero): SecondHero {
 }
 
 //Object.freeze() -> Bloquea los cambios en el objeto -> Inmutable
-const secondThor = Object.freeze(secondCreateHero({ name: 'Thor', power: 1500 }))
+const secondThor = secondCreateHero({ name: 'Thor', power: 1500 })
+secondThor.powerScale = 'planetary'
 
 console.log(secondThor.isActive) // true
 
-// secondThor.id?.toString()
+// Extend types -> INTERSECTION TYPES
 
-//Mutabilidad -> ❌
-// secondThor.id = 42422434324324
+type SecondHeroId = `${string}-${string}-${string}-${string}-${string}`
 
+type SecondHeroPowerScale = 'local' | 'planetary' | 'galactic' | 'universal' | 'multiversal'
+
+type HeroBasicInfo = {
+  name: string
+  power: number
+}
+
+type HeroProperties = {
+  readonly id?: SecondHeroId
+  isActive?: boolean
+  powerScale?: SecondHeroPowerScale
+}
+
+type ThirdHero = HeroBasicInfo & HeroProperties
+
+let thirdHero: ThirdHero = {
+  name: 'Thor',
+  power: 1500,
+}
+
+function thirdCreateHero(input: HeroBasicInfo): ThirdHero {
+  const { name, power } = input
+  return {
+    id: crypto.randomUUID(),
+    name,
+    power,
+    isActive: true,
+  }
+}
+
+const thirdThor = thirdCreateHero({ name: 'Thor', power: 1500 })
+thirdThor.powerScale = 'planetary'
+
+// Type Indexing -> Indices de tipos
 
