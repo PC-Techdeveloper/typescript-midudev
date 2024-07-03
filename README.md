@@ -21,6 +21,8 @@ Type never and void
 ```ts
 // COMO EJECUTAR TYPESSCRIPT DESDE LA LINEA DE COMANDO -> https://rootstack.com/es/blog/nodejs-tsnode
 
+// COMO EJECUTAR TYPESSCRIPT DESDE LA LINEA DE COMANDO -> https://rootstack.com/es/blog/nodejs-tsnode
+
 //Types of data
 const number = 1
 let n: number = 2
@@ -167,14 +169,17 @@ const thor = createHero({ name: 'Thor', power: 1500 })
 // readonly -> Propiedad de lectura
 
 // Templates union types
-
 type HeroId = `${string}-${string}-${string}-${string}-${string}`
+
+//Union Types -> Tipos unidos
+type HeroPowerScale = 'local' | 'planetary' | 'galactic' | 'universal' | 'multiversal'
 
 type SecondHero = {
   readonly id?: HeroId
   name: string
   power: number
   isActive?: boolean
+  powerScale?: HeroPowerScale
 }
 
 let secondHero: SecondHero = {
@@ -193,12 +198,133 @@ function secondCreateHero(hero: SecondHero): SecondHero {
 }
 
 //Object.freeze() -> Bloquea los cambios en el objeto -> Inmutable
-const secondThor = Object.freeze(secondCreateHero({ name: 'Thor', power: 1500 }))
+const secondThor = secondCreateHero({ name: 'Thor', power: 1500 })
+secondThor.powerScale = 'planetary'
 
 console.log(secondThor.isActive) // true
 
-// secondThor.id?.toString()
+// Extend types -> INTERSECTION TYPES
 
-//Mutabilidad -> ❌
-// secondThor.id = 42422434324324
+type SecondHeroId = `${string}-${string}-${string}-${string}-${string}`
+
+type SecondHeroPowerScale = 'local' | 'planetary' | 'galactic' | 'universal' | 'multiversal'
+
+type HeroBasicInfo = {
+  name: string
+  power: number
+}
+
+type HeroProperties = {
+  readonly id?: SecondHeroId
+  isActive?: boolean
+  powerScale?: SecondHeroPowerScale
+}
+
+type ThirdHero = HeroBasicInfo & HeroProperties
+
+let thirdHero: ThirdHero = {
+  name: 'Thor',
+  power: 1500,
+}
+
+function thirdCreateHero(input: HeroBasicInfo): ThirdHero {
+  const { name, power } = input
+  return {
+    id: crypto.randomUUID(),
+    name,
+    power,
+    isActive: true,
+  }
+}
+
+const thirdThor = thirdCreateHero({ name: 'Thor', power: 1500 })
+thirdThor.powerScale = 'planetary'
+
+// Type Indexing -> Indices de tipos
+
+type SecondHeroProperties = {
+  isActive: boolean
+  address: {
+    planet: string
+    city: string
+  }
+}
+
+const addressHero: SecondHeroProperties['address'] = {
+  planet: 'Earth',
+  city: 'Madrid',
+}
+
+// Type from value and typeof
+// Typeof -> Extraer los tipos de un objeto, funciones, variables, etc.
+const address1 = {
+  planet: 'Earth',
+  city: 'Madrid',
+}
+
+type Address = typeof address1
+
+const address2: Address = {
+  planet: 'Mars',
+  city: 'Paris',
+}
+
+// Type from function return
+function createAdress() {
+  return {
+    planet: 'Tierra',
+    city: 'Barcelona',
+  }
+}
+//Type of return in the function
+type Address3 = ReturnType<typeof createAdress>
+
+//ARRAYS
+
+const languages: (string | number | boolean)[] = []
+// const languages2: Array<string | number | boolean> = [] -> Otra forma ✅
+
+languages.push('TypeScript')
+languages.push('JavaScript')
+languages.push('Java')
+languages.push(2)
+languages.push(true)
+
+type ThirdHeroId = `${string}-${string}-${string}-${string}-${string}`
+
+type ThirdHeroPowerScale = 'local' | 'planetary' | 'galactic' | 'universal' | 'multiversal'
+
+type SecondHeroBasicInfo = {
+  name: string
+  power: number
+}
+
+const herosWithBasicInfo: SecondHeroBasicInfo[] = []
+
+//Matrices
+
+type CellValue = 'x' | 'o' | ''
+
+//Tuples -> Array that can have a fixed length
+type GameBoard = [[CellValue, CellValue, CellValue], [CellValue, CellValue, CellValue], [CellValue, CellValue, CellValue]]
+
+const gameBoard: GameBoard = [
+  ['x', 'o', 'x'],
+  ['o', 'x', 'o'],
+  ['x', '', 'o'],
+]
+
+gameBoard[0][1] = 'o'
+
+// Other tuple
+//We can description how is the state of the tuple
+
+type State = [string, (newName: string) => void]
+// const [myHero, setMyHero]: State = useState('Thor')
+
+//Codes RGB
+
+type RGB = [number, number, number]
+
+const rgb: RGB = [255, 255, 0]
 ```
