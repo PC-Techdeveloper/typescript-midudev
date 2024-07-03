@@ -209,7 +209,7 @@
   },
   "terminal.integrated.fontSize": 15,
   "editor.fontSize": 15,
-  "editor.lineHeight": 20,
+  "editor.lineHeight": 25,
   "editor.fontFamily": "Cascadia Code",
   "terminal.integrated.fontFamily": "Cascadia Code",
   "editor.cursorStyle": "line",
