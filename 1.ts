@@ -277,3 +277,30 @@ type SecondHeroBasicInfo = {
 }
 
 const herosWithBasicInfo: SecondHeroBasicInfo[] = []
+
+//Matrices
+
+type CellValue = 'x' | 'o' | ''
+
+//Tuples -> Array that can have a fixed length
+type GameBoard = [[CellValue, CellValue, CellValue], [CellValue, CellValue, CellValue], [CellValue, CellValue, CellValue]]
+
+const gameBoard: GameBoard = [
+  ['x', 'o', 'x'],
+  ['o', 'x', 'o'],
+  ['x', '', 'o'],
+]
+
+gameBoard[0][1] = 'o'
+
+// Other tuple
+//We can description how is the state of the tuple
+
+type State = [string, (newName: string) => void]
+// const [myHero, setMyHero]: State = useState('Thor')
+
+//Codes RGB
+
+type RGB = [number, number, number]
+
+const rgb: RGB = [255, 255, 0]
