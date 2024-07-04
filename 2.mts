@@ -82,11 +82,25 @@ interface Zapatilla extends Producto {
 
 interface CarritoDeCompras {
   totalPrice: number
-  productos: Zapatilla[]
+  productos: (Producto | Zapatilla)[]
+}
+
+//Indicar las funciones en las interfaces
+//Primera forma
+interface CarritoOpsOne {
+  add: (product: Producto) => void
+  remove: (id: number) => void
+  clear: () => void
+}
+//Segunda forma
+interface CarritoOpsTwo {
+  add(product: Producto): void
+  remove(id: number): void
+  clear(): void
 }
 
 const carrito: CarritoDeCompras = {
-  totalPrice: 0,
+  totalPrice: 100,
   productos: [
     {
       id: 1,
@@ -97,4 +111,3 @@ const carrito: CarritoDeCompras = {
     },
   ],
 }
-
