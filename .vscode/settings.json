@@ -208,11 +208,10 @@
     "*": true
   },
   "terminal.integrated.fontSize": 15,
-  "editor.fontSize": 15,
-  "editor.lineHeight": 25,
+  "editor.fontSize": 14,
   "editor.fontFamily": "Cascadia Code",
   "terminal.integrated.fontFamily": "Cascadia Code",
-  "editor.cursorStyle": "line",
+  "editor.cursorStyle": "block",
   "window.zoomLevel": 1,
   "editor.minimap.maxColumn": 40,
   "workbench.preferredDarkColorTheme": "One Dark Pro Darker",
@@ -245,10 +244,11 @@
     }
   },
   "files.autoSave": "afterDelay",
-  "editor.minimap.enabled": false,
+  "editor.minimap.enabled": true,
   "terminal.integrated.env.windows": {},
   "console-ninja.featureSet": "Community",
   "editor.parameterHints.enabled": false,
   "liveServer.settings.fullReload": true,
-  "css.lint.unknownAtRules": "ignore"
+  "css.lint.unknownAtRules": "ignore",
+  "oneDarkPro.italic": true
 }
