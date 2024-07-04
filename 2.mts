@@ -87,27 +87,61 @@ interface CarritoDeCompras {
 
 //Indicar las funciones en las interfaces
 //Primera forma
-interface CarritoOpsOne {
+
+//Interfaces -> Extending an interface, adding new fields to an existing interface
+//Las interfaces se pueden utilizar más para objetos y clases.
+//Types -> Extending a type via intersection types, union, a type cannot be changed
+//after being created.
+
+interface CarritoOps {
   add: (product: Producto) => void
   remove: (id: number) => void
   clear: () => void
 }
 //Segunda forma
-interface CarritoOpsTwo {
-  add(product: Producto): void
-  remove(id: number): void
-  clear(): void
+interface CarritoOps {
+  clear: () => void
 }
 
-const carrito: CarritoDeCompras = {
-  totalPrice: 100,
-  productos: [
-    {
-      id: 1,
-      nombre: 'Producto 1',
-      precio: 10,
-      quantity: 1,
-      talla: 10,
-    },
-  ],
+const ops: CarritoOps = {
+  add: (product: Producto) => {},
+  remove: (id: number) => {},
+  clear: () => {},
+}
+
+// Narrowing
+// Ejemplo 1
+function mostrarLongitud(objeto: number | string) {
+  if (typeof objeto === 'string') {
+    return objeto.length
+  }
+
+  return objeto.toString().length
+}
+
+mostrarLongitud('1')
+
+// Ejemplo 2
+
+interface Mario {
+  company: 'Nintendo'
+  nombre: string
+  saltar: () => void
+}
+
+interface Sonic {
+  company: 'Sega'
+  nombre: string
+  correr: () => void
+}
+
+type Personaje = Mario | Sonic
+
+function jugar(personaje: Personaje) {
+  if (personaje.company === 'Nintendo') {
+    personaje.saltar()
+    return // <- ESTE ES MARIO
+  }
+  //Seguro que solo llega a Sonic
+  personaje.correr()
 }
