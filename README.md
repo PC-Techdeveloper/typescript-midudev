@@ -1,5 +1,7 @@
 # APRENDIENDO TYPESCRIPT
 
+# Parte 1
+
 Functions
 Arrow functions
 Types Alias
@@ -327,4 +329,118 @@ type State = [string, (newName: string) => void]
 type RGB = [number, number, number]
 
 const rgb: RGB = [255, 255, 0]
+```
+
+# Parte 2
+
+# Acerciones de Tipos
+
+Las aserciones de tipos en TypeScript son una forma de informar al compilador sobre el tipo de una variable cuando el programador sabe más que el sistema de tipos de TypeScript. Esto no cambia el tipo en tiempo de ejecución, sino que ayuda al compilador a entender mejor el tipo esperado para realizar las comprobaciones necesarias y proporcionar autocompletado y otros beneficios del análisis estático.
+
+- Casos de uso común: Trabajar con datos de APIS, bibliotecas de JavaScript, Migración de JavaScript a TypeScript,
+
+```ts
+//En Typescript, las aserciones de tipo se realizan utilizando el operador `as`
+let someValue: any = 'this is a string'
+let stringLength: number = (someValue as string).length
+
+//Trabajar con tipos personalizados
+type User = {
+  name: string
+  age: number
+}
+
+let user: string | number = {
+  name: 'John',
+  age: 30,
+}
+
+//Aserción de tipo
+let userType = user as User
+console.log(userType.name)
+```
+
+# Interfaces
+
+Las interfaces en TypeScript son una forma de definir la estructura de un objeto. Permiten especificar qué propiedades y métodos debe tener un objeto, así como los tipos de esas propiedades y métodos. A diferencia de los tipos (type), las interfaces pueden ser extendidas y combinadas, lo que facilita la reutilización del código y la creación de jerarquías de tipos.
+
+- Casos de uso común: Definición de modelos de datos, interoperabilidad con bibliotecas de JavaScript, desarrollo de componentes reutilizables.
+
+```ts
+//Sintaxis de interfaces
+interface User {
+  name: string
+  age: number
+}
+
+let user: User ? {
+  name: 'John',
+  age: 30,
+}
+
+//Propiedades opcionales -> ?
+interface User {
+  name: string
+  age?: number
+}
+
+let user: User = {
+  name: 'John',
+}
+
+//Propiedades de solo lectura -> Marcar propiedadaes como de solo lectura usando la palabra clave `readonly`
+interface User {
+  readonly id: number // id es de solo lectura
+  name: string
+}
+
+let user: User = {
+  id: 1,
+  name: 'John',
+}
+
+//Extensión de interfaces -> Las interfaces pueden extenderse para crear una nueva interfaz que herede las propiedades y métodos de la interfaz original.
+interface Person {
+  name: string
+}
+
+interface Employee extends Person {
+  employeeId: number
+}
+
+
+//Interfaces para funciones -> Pueden definir la firma de una función usando una interfaz
+interface SearchFunc{
+  (source: string, subString: string): boolean
+}
+
+let mySearch: SearchFunc = function(source: string, subString: string): boolean {
+  return source.includes(subString);
+};
+
+//Index signatures -> Permiten definir propiedades de un objeto cuando no se conoce de antemano los nombres de las propiedades.
+
+interface StringArray {
+  [index: number]: string
+}
+
+let myArray: StringArray = ['a', 'b', 'c']
+
+```
+
+# Narrowing
+
+Es el proceso mediante el cual el compilador reduce el conjunto de posibles tipos de una variable basándose en el contexto del código. Esto permite que el compilador entienda mejor el tipo de una variable en un punto específico del código, proporcionando así mejores comprobaciones de tipo y autocompletado.
+
+```ts
+//Ejemplo 1
+function mostrarLongitud(objeto: number | string) {
+  if (typeof objeto === 'string') {
+    return objeto.length
+  }
+
+  return objeto.toString().length
+}
+
+mostrarLongitud('1')
 ```
