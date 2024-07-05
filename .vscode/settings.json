@@ -175,13 +175,13 @@
   // I only use Prettier for manually formatting
   "prettier.enable": true,
   "prettier.printWidth": 200,
-  "prettier.semi": false,
+  "prettier.semi": true,
   "prettier.singleQuote": true,
-  "prettier.arrowParens": "avoid",
   "editor.wordWrap": "on",
   "breadcrumbs.enabled": false,
   "editor.smoothScrolling": true,
   "terminal.integrated.smoothScrolling": true,
+  "files.autoSave": "afterDelay",
   "symbols.hidesExplorerArrows": false,
   "[html]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
@@ -190,7 +190,8 @@
   "[javascript]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
-  "terminal.integrated.defaultProfile.windows": "PowerShell",
+  "terminal.integrated.defaultProfile.windows": "Windows PowerShell",
+  "editor.minimap.enabled": false,
   "[javascriptreact]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
@@ -199,37 +200,33 @@
   },
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "editor.formatOnPaste": true,
+  "editor.formatOnSave": true,
   "workbench.editor.enablePreview": false,
   "javascript.updateImportsOnFileMove.enabled": "always",
   "editor.fontLigatures": true,
   "zenMode.fullScreen": true,
   "explorer.confirmPasteNative": false,
+  "editor.fontFamily": "Cascadia Code",
   "supermaven.enable": {
     "*": true
   },
-  "terminal.integrated.fontSize": 15,
-  "editor.fontSize": 14,
-  "editor.fontFamily": "Cascadia Code",
-  "terminal.integrated.fontFamily": "Cascadia Code",
-  "editor.cursorStyle": "block",
-  "window.zoomLevel": 1,
-  "editor.minimap.maxColumn": 40,
   "workbench.preferredDarkColorTheme": "One Dark Pro Darker",
-  "editor.scrollbar.vertical": "hidden",
-  "editor.scrollbar.horizontal": "hidden",
-  "editor.cursorBlinking": "expand",
-  "workbench.sideBar.location": "right",
-  "editor.glyphMargin": false,
-  "oneDarkPro.vivid": true,
+  "terminal.integrated.fontSize": 16,
+  "terminal.integrated.fontFamily": "Cascadia Code",
+  "editor.fontSize": 14,
+  "window.zoomLevel": 1,
+  "editor.lineHeight": 32,
+  "editor.folding": false,
+  "terminal.integrated.lineHeight": 1.5,
+  "editor.cursorStyle": "line",
   "oneDarkPro.bold": true,
-  "git.openRepositoryInParentFolders": "always",
-  "[astro]": {
-    "editor.defaultFormatter": "astro-build.astro-vscode"
-  },
+  "oneDarkPro.italic": true,
+  "oneDarkPro.vivid": true,
+  "workbench.sideBar.location": "right",
   "terminal.integrated.profiles.windows": {
     "PowerShell": {
-      "source": "PowerShell",
-      "icon": "terminal-powershell"
+      "source": "Git Bash",
+      "icon": "terminal-bash"
     },
     "Command Prompt": {
       "path": ["${env:windir}\\Sysnative\\cmd.exe", "${env:windir}\\System32\\cmd.exe"],
@@ -242,13 +239,5 @@
     "Windows PowerShell": {
       "path": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe"
     }
-  },
-  "files.autoSave": "afterDelay",
-  "editor.minimap.enabled": true,
-  "terminal.integrated.env.windows": {},
-  "console-ninja.featureSet": "Community",
-  "editor.parameterHints.enabled": false,
-  "liveServer.settings.fullReload": true,
-  "css.lint.unknownAtRules": "ignore",
-  "oneDarkPro.italic": true
+  }
 }
