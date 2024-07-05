@@ -151,9 +151,3 @@ function fn(x: string | number) {
     x; // never
   }
 }
-
-function greet(name: string) {
-  console.log(`Hola! mi nombre es ${name}`);
-}
-
-greet('Leo');

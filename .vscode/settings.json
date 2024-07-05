@@ -211,33 +211,16 @@
     "*": true
   },
   "workbench.preferredDarkColorTheme": "One Dark Pro Darker",
-  "terminal.integrated.fontSize": 16,
+  "terminal.integrated.fontSize": 15,
   "terminal.integrated.fontFamily": "Cascadia Code",
-  "editor.fontSize": 14,
+  "editor.fontSize": 15,
   "window.zoomLevel": 1,
-  "editor.lineHeight": 25,
   "editor.folding": false,
-  "terminal.integrated.lineHeight": 1.5,
+  "editor.lineHeight": 25,
+  "terminal.integrated.lineHeight": 1,
   "editor.cursorStyle": "line",
   "oneDarkPro.bold": true,
   "oneDarkPro.italic": true,
   "oneDarkPro.vivid": true,
-  "workbench.sideBar.location": "right",
-  "terminal.integrated.profiles.windows": {
-    "PowerShell": {
-      "source": "Git Bash",
-      "icon": "terminal-bash"
-    },
-    "Command Prompt": {
-      "path": ["${env:windir}\\Sysnative\\cmd.exe", "${env:windir}\\System32\\cmd.exe"],
-      "args": [],
-      "icon": "terminal-cmd"
-    },
-    "Git Bash": {
-      "source": "Git Bash"
-    },
-    "Windows PowerShell": {
-      "path": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe"
-    }
-  }
+  "workbench.sideBar.location": "right"
 }
