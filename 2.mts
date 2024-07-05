@@ -9,11 +9,11 @@ enum ERROR_TYPES {
 
 function mostrarMensaje(tipoDeError) {
   if (tipoDeError === ERROR_TYPES.NOT_FOUND) {
-    console.log('No se encuentra el recurso')
+    console.log('No se encuentra el recurso');
   } else if (tipoDeError === ERROR_TYPES.UNAUTHORIZED) {
-    console.log('No tienes permisos para acceder a este recurso')
+    console.log('No tienes permisos para acceder a este recurso');
   } else if (tipoDeError === ERROR_TYPES.FORBIDDEN) {
-    console.log('No tienes permisos para acceder a este recurso')
+    console.log('No tienes permisos para acceder a este recurso');
   }
 }
 
@@ -23,10 +23,10 @@ function mostrarMensaje(tipoDeError) {
 //Tipo más específico -> HTMLCanvasElement
 
 //Es inferencia -> Typescript se da cuenta que va a ser HTMLCanvasElement
-const canvas = document.getElementById('span')
+const canvas = document.getElementById('span');
 
 if (canvas instanceof HTMLCanvasElement) {
-  const ctx = canvas.getContext('2d')
+  const ctx = canvas.getContext('2d');
 }
 
 // typeof -> Para tipos
@@ -55,10 +55,10 @@ if (canvas instanceof HTMLCanvasElement) {
 Las interfaces verifican la estructura de los objetos, proporcionando una forma clara y explícita de específicar contratos entre diferentes partes del código.
 */
 interface Heroe {
-  id: string
-  name: string
-  age: number
-  gretting: () => void
+  id: string;
+  name: string;
+  age: number;
+  gretting: () => void;
 }
 
 const hero: Heroe = {
@@ -66,23 +66,23 @@ const hero: Heroe = {
   name: 'Batman',
   age: 35,
   gretting: () => console.log('Hola soy un heroe'),
-}
+};
 
 interface Producto {
-  id: number
-  nombre: string
-  precio: number
-  quantity: number
+  id: number;
+  nombre: string;
+  precio: number;
+  quantity: number;
 }
 
 //Herencia de interfaces -> Extends
 interface Zapatilla extends Producto {
-  talla: number
+  talla: number;
 }
 
 interface CarritoDeCompras {
-  totalPrice: number
-  productos: (Producto | Zapatilla)[]
+  totalPrice: number;
+  productos: (Producto | Zapatilla)[];
 }
 
 //Indicar las funciones en las interfaces
@@ -94,54 +94,66 @@ interface CarritoDeCompras {
 //after being created.
 
 interface CarritoOps {
-  add: (product: Producto) => void
-  remove: (id: number) => void
-  clear: () => void
+  add: (product: Producto) => void;
+  remove: (id: number) => void;
+  clear: () => void;
 }
 //Segunda forma
 interface CarritoOps {
-  clear: () => void
+  clear: () => void;
 }
 
 const ops: CarritoOps = {
   add: (product: Producto) => {},
   remove: (id: number) => {},
   clear: () => {},
-}
+};
 
 // Narrowing
 // Ejemplo 1
 function mostrarLongitud(objeto: number | string) {
   if (typeof objeto === 'string') {
-    return objeto.length
+    return objeto.length;
   }
 
-  return objeto.toString().length
+  return objeto.toString().length;
 }
 
-mostrarLongitud('1')
+mostrarLongitud('1');
 
 // Ejemplo 2
 
 interface Mario {
-  company: 'Nintendo'
-  nombre: string
-  saltar: () => void
+  nombre: string;
+  saltar: () => void;
 }
 
 interface Sonic {
-  company: 'Sega'
-  nombre: string
-  correr: () => void
+  nombre: string;
+  correr: () => void;
 }
 
-type Personaje = Mario | Sonic
+type Personaje = Mario | Sonic;
+//Type Guards
+function checkIsSonic(personaje: Personaje): personaje is Sonic {
+  return (personaje as Sonic).correr !== undefined;
+}
 
-function jugar(personaje: Personaje) {
-  if (personaje.company === 'Nintendo') {
-    personaje.saltar()
-    return // <- ESTE ES MARIO
+//Type Never
+function fn(x: string | number) {
+  if (typeof x === 'string') {
+    // x es string
+    x.toUpperCase();
+  } else if (typeof x === 'number') {
+    // do something with x
+    x.toFixed(2);
+  } else {
+    x; // never
   }
-  //Seguro que solo llega a Sonic
-  personaje.correr()
 }
+
+function greet(name: string) {
+  console.log(`Hola! mi nombre es ${name}`);
+}
+
+greet('Leo');

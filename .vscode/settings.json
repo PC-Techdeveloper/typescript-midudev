@@ -215,7 +215,7 @@
   "terminal.integrated.fontFamily": "Cascadia Code",
   "editor.fontSize": 14,
   "window.zoomLevel": 1,
-  "editor.lineHeight": 32,
+  "editor.lineHeight": 25,
   "editor.folding": false,
   "terminal.integrated.lineHeight": 1.5,
   "editor.cursorStyle": "line",
