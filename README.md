@@ -500,3 +500,278 @@ function move(animal: Bird | Fish) {
   }
 }
 ```
+
+# Propiedades private, public, protected.
+
+Se utilizan para controlar la visibilidad y el acceso de las propiedades y métodos dentro de las clases. Estas palabras clave ayudan a definir que partes de una clase son accesibles desde fuera de la misma, desde las subclases o solo desde la propia clase.
+
+- Public -> Son accesibles desde cualquier lugar, es decir, desde dentro de la clase, fuera de la clase y desde las subclases.
+
+- Private -> Solo son accesibles desde dentro de la clase donde se declararon.
+
+- Protected -> Son accesibles desde dentro de la clase y desde las subclases, pero no desde fuera de la clase. Es útil si se desea permitir el acceso a subclases pero no exponer las propiedades o métodos fuera de la jerarquía de clases.
+
+```ts
+//Public
+
+class Persona {
+  public nombre: string;
+  constructor(nombre: string) {
+    this.nombre = nombre;
+  }
+
+  public saludar() {
+    console.log(`Hola ${this.nombre}`);
+  }
+}
+const persona = new Persona('Maria');
+console.log(persona.nombre); // <- Acceso público
+
+persona.saludar(); // <- Acceso público
+
+//Private
+
+class Persona {
+  private edad: number;
+
+  constructor(edad: number) {
+    this.edad = edad;
+  }
+
+  private mostrarEdad() {
+    console.log(`Tengo ${this.edad} años`);
+  }
+
+  public saludar() {
+    this.mostrarEdad(); // <- Acceso privado dentro de la clase
+  }
+}
+
+const persona = new Persona(30);
+console.log(persona.edad); // <-  Error: 'edad' es private ❌
+persona.mostrarEdad(); // <- Error: 'mostrarEdad' es private ❌
+persona.saludar(); // <- Correcto, el método public puede acceder a métodos y propiedades private dentro de la clase ✅
+
+//Protected
+
+class Persona {
+  protected nombre: string;
+
+  constructor(nombre: string) {
+    this.nombre = nombre;
+  }
+}
+
+class Estudiante extends Persona {
+  private grado: string;
+
+  constructor(nombre: string, grado: string) {
+    super(nombre);
+    this.grado = grado;
+  }
+
+  public presentar() {
+    console.log(`Hola, soy ${this.nombre} y estoy en ${this.grado}`);
+  }
+}
+
+const estudiante = new Estudiante('Jefferson', '10º grado');
+estudiante.presentar(); // <- Acceso permitido a 'nombre' desde la subclase ✅
+console.log(estudiante.nombre); // <- Error: 'nombre' es protected ❌
+```
+
+# Interfaces en clases
+
+Las interfaces son útiles para asegurar que los objetos tengan una forma sencilla y puedan ser implementadas por clases
+
+```ts
+/*
+Sintaxis de interfaces en clases
+Esta interfaz persona, define que cualquier objeto que implemente esta interfaz debe tener una propiedad nombre de tipo string, edad de tipo number y un método saludar que no retorna nada.
+*/
+interface Persona {
+  nombre: string;
+  edad: number;
+  saludar: () => void;
+}
+
+/*
+Implementación de una interfaz en una clase
+Una clase puede implementar usando la palabra clave 'implements', esto asegura que la clase siga la estructura de la interfaz.
+*/
+class Estudiante implements Persona {
+  nombre: string;
+  edad: number;
+  curso: string;
+
+  constructor(nombre: string, edad: number, curso: string) {
+    this.nombre = nombre;
+    this.edad = edad;
+    this.curso = curso;
+  }
+
+  saludar(): void {
+    console.log(`Hola, mi nombre es ${this.nombre} y tengo ${this.edad} años.`);
+  }
+}
+
+const estudiante = new Estudiante('Jefferson', 25, 'Matemáticas');
+estudiante.saludar(); // <- Hola, mi nombre es Jefferson y tengo 25 años ✅.
+
+/*
+Propiedades opcionales: Puedes definir propiedades opcionales en una interfaz usando el símbolo de interrogación (?) antes del nombre de la propiedad.
+*/
+
+interface Persona {
+  nombre: string;
+  edad: number;
+  direccion?: string; // <- Propiedad opcional
+  saludar: () => void;
+}
+
+/*
+Herencia de interfaces: 
+Las interfaces pueden heredar de otras interfaces, lo que permite crear jerarquías de interfaces.
+*/
+
+interface Empleado extends Persona {
+  salario: number;
+  trabajar(): void;
+}
+
+class Developer implements Empleado {
+  nombre: string;
+  edad: number;
+  salario: number;
+  lenguajes: string[];
+
+  constructor(nombre: string, edad: number, salario: number, lenguajes: string[]) {
+    this.nombre = nombre;
+    this.edad = edad;
+    this.salario = salario;
+    this.lenguajes = lenguajes;
+  }
+
+  saludar(): void {
+    console.log(`Hola, soy ${this.nombre}, un programador.`);
+  }
+
+  trabajar(): void {
+    console.log(`Estoy trabajando en ${this.lenguajes.join(', ')}.`);
+  }
+}
+
+const programador = new Developer('Ana', 30, 50000, ['TypeScript', 'JavaScript']);
+programador.saludar(); // <- Hola, soy Ana, un programador ✅.
+programador.trabajar(); // <- Estoy trabajando en TypeScript, JavaScript ✅.
+```
+
+# Definiciones de tipos
+
+-- Las definiciones de tipo son esenciales para proporcionar una tipicidad estática que ayuda a prevener errores durante el desarrollo y mejorar la inteligencia de código.
+
+- Definiciones básicas de tipos -> TypeScript permite definir tipos para variables, funciones, objetos y más.
+
+```ts
+//Tipos primitivos
+let name: string = 'John';
+let age: number = 30;
+let isStudent: boolean = true;
+
+//Tipos de funciones
+function sayHello(name: string) {
+  return `Hello, ${name}!`;
+}
+
+let myGreeting: (name: string) => string;
+myGreeting = sayHello;
+
+//Tipos de objetos
+let persona: { name: string; age: number } {
+  name: 'John',
+  age: 30,
+};
+
+/*
+Interfaces -> Las interfaces son una forma de definir la estructura de un objeto. Son muy útiles para asegurar que los objetos sigan una estructura específica y proporcionar autocompletado y otros beneficios del análisis estático.
+*/
+interface Persona {
+  name: string;
+  age: number;
+}
+
+let persona: Persona = {
+  name: 'Jefferson',
+  age: 25,
+}
+
+/*
+Tipos personalizados (Type Aliases) -> Permiten crear tipos personalizados que pueden ser reutilizados en tu código.
+*/
+
+type ID = number | string;
+
+let userID: ID = 10;
+userID = '10'; // <- Válido ✅
+userID = 10; // <- Válido ✅
+
+/*
+Tipos de unión y de inserción -> Permiten que una variable pueda ser de uno de varios tipos.
+*/
+//UNIÓN
+let identificador: number | string;
+identificador = 10; // <- Válido ✅
+identificador = 'ABC'; // <- Válido ✅
+//INSERCIÓN -> Combinar múltiples tipos en un solo tipo
+
+interface A {
+  a: number;
+}
+
+interface B {
+  b: string;
+}
+
+type C = A & B;
+
+let ejemplo: C = {
+  a: 1,
+  b: "texto",
+};
+
+/*
+Tipos genéricos -> Permiten crear componentes que puedan trabajar con cualquier tipo.
+*/
+function identificar<T>(elemento: T): T {
+  return arg;
+}
+
+let outSide = identificar<number>(5); // <- Tipo inferido como número ✅
+let secondOutSide = identificar<string>('hola'); // <- Tipo inferido como string ✅
+
+//DEFINICIONES DE TIPOS EXTERNOS (d.ts) -> Permiten que TypeScript conozca los tipos de bibliotecas de JavaScript no escritas en TypeScript.
+
+
+//miLibreria.d.ts
+declare module 'miLibreria'{
+  export function sumar(a: number, b: number): number;
+  export const version: string;
+}
+
+//Usar definiición en código TypeScript
+import { sumar, version } from 'miLibreria';
+
+sumar(1, 2); // <- Válido ✅
+console.log(version); // <- Válido ✅
+
+//DEFINICIONES DE TIPO DE DEFINITELY TYPED -> Es un repositorio que contiene definiciones de tipos para muchas bibliotecas de JavaScript.
+
+- Se instala usando npm install -> npm install @types/lodash
+
+//Luego usar las definiciones de tipos en el código
+import * as _ from 'lodash';
+
+let result = _.chunk(['a', 'b', 'c', 'd'], 2);
+console.log(result);
+
+```
