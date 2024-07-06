@@ -7,15 +7,15 @@ enum ERROR_TYPES {
   FORBIDDEN = 'forbidden',
 }
 
-function mostrarMensaje(tipoDeError) {
-  if (tipoDeError === ERROR_TYPES.NOT_FOUND) {
-    console.log('No se encuentra el recurso');
-  } else if (tipoDeError === ERROR_TYPES.UNAUTHORIZED) {
-    console.log('No tienes permisos para acceder a este recurso');
-  } else if (tipoDeError === ERROR_TYPES.FORBIDDEN) {
-    console.log('No tienes permisos para acceder a este recurso');
-  }
-}
+// function mostrarMensaje(tipoDeError) {
+//   if (tipoDeError === ERROR_TYPES.NOT_FOUND) {
+//     console.log('No se encuentra el recurso');
+//   } else if (tipoDeError === ERROR_TYPES.UNAUTHORIZED) {
+//     console.log('No tienes permisos para acceder a este recurso');
+//   } else if (tipoDeError === ERROR_TYPES.FORBIDDEN) {
+//     console.log('No tienes permisos para acceder a este recurso');
+//   }
+// }
 
 //Aserciones de tipos
 //Null si no lo encuentra
@@ -23,11 +23,11 @@ function mostrarMensaje(tipoDeError) {
 //Tipo más específico -> HTMLCanvasElement
 
 //Es inferencia -> Typescript se da cuenta que va a ser HTMLCanvasElement
-const canvas = document.getElementById('span');
+// const canvas = document.getElementById('span');
 
-if (canvas instanceof HTMLCanvasElement) {
-  const ctx = canvas.getContext('2d');
-}
+// if (canvas instanceof HTMLCanvasElement) {
+//   const ctx = canvas.getContext('2d');
+// }
 
 // typeof -> Para tipos
 // instanceof -> Para instancias
@@ -151,3 +151,49 @@ function fn(x: string | number) {
     x; // never
   }
 }
+
+//Ejemplo -> Tipar una clase, con interfaces también se puede
+
+//Propiedades private, public, protected.
+//Private -> Forma estática.
+//Public -> Público.
+//Readonly -> Solo lectura.
+//Protected -> Protegido, no puede ser accedido en instancias de la clase, pero si puede acceder en clases que heredan.
+
+//Interfaces en clases
+import { type IAvenger } from './types.d';
+
+class Avenger implements IAvenger {
+  name: string;
+  powerScore: number;
+  wonBattles: number;
+  age: number;
+
+  constructor(name: string, powerScore: number) {
+    this.name = name;
+    this.powerScore = powerScore;
+  }
+
+  battle(enemy, win) {
+    if (win) {
+      this.wonBattles++;
+      this.powerScore += 5;
+    } else {
+      this.powerScore -= 5;
+    }
+  }
+
+  get fullName() {
+    return `${this.name} tiene ${this.powerScore} puntos de poder`;
+  }
+
+  set power(newPower: number) {
+    if (newPower <= 100) {
+      this.powerScore = newPower;
+    } else {
+      throw new Error('Power score cannot be greater than 100');
+    }
+  }
+}
+
+const avenger = new Avenger('Spidey', 80);
